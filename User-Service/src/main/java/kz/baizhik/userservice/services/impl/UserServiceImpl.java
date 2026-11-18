@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import kz.baizhik.userservice.exceptions.EmailAlreadyExistsException;
 import kz.baizhik.userservice.exceptions.InvalidCredentialsException;
 import kz.baizhik.userservice.exceptions.UserNotFoundException;
+import kz.baizhik.userservice.mappers.UserMapper;
 import kz.baizhik.userservice.model.Role;
 import kz.baizhik.userservice.model.dto.AuthResponseDTO;
 import kz.baizhik.userservice.model.dto.UserDTO;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final UserMapper userMapper;
+
+
 
     @Override
     @Transactional
@@ -43,9 +47,9 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.USER);
         user.setEnabled(true);
 
-        try{
-            return toResponse(userRepository.saveAndFlush(user));}
-        catch (DataIntegrityViolationException e){
+        try {
+            return toResponse(userRepository.saveAndFlush(user));
+        } catch (DataIntegrityViolationException e) {
             throw new EmailAlreadyExistsException(email);
         }
     }
@@ -69,9 +73,8 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO getById(Long id) {
         return userRepository.findById(id)
                 .map(this::toResponse)
-                .orElseThrow(()->new UserNotFoundException(id));
-        }
-
+                .orElseThrow(() -> new UserNotFoundException(id));
+    }
 
 
     private String normalizeEmail(String email) {
@@ -86,7 +89,10 @@ public class UserServiceImpl implements UserService {
                 user.getCreatedAt(),
                 user.isEnabled()
         );
+
+
     }
+
 
 
 }
