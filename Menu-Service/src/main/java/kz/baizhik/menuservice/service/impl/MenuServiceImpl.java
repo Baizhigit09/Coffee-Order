@@ -57,8 +57,12 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
-
+        if (!drinkRepository.existsById(id)) {
+            throw new DrinkNotFoundException(id);
+        }
+        drinkRepository.deleteById(id);
     }
 
     private void apply(Drink drink, DrinkRequestDTO r) {
