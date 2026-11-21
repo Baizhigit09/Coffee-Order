@@ -26,7 +26,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public PageResponseDTO<DrinkResponseDTO> gatAll(Long categoryId, Pageable pageable) {
+    public PageResponseDTO<DrinkResponseDTO> getAll(Long categoryId, Pageable pageable) {
         Page<Drink> page = (categoryId == null)
                 ? drinkRepository.findAll(pageable)
                 : drinkRepository.findByCategoryId(categoryId, pageable);
