@@ -25,7 +25,7 @@ public class MenuController {
         return menuService.getAll(categoryId, pageable);
     }
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public DrinkResponseDTO getById(@PathVariable Long id) {
         return menuService.getById(id);
     }
@@ -35,12 +35,12 @@ public class MenuController {
         return ResponseEntity.status(HttpStatus.CREATED).body(menuService.create(request));
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public DrinkResponseDTO update(@PathVariable Long id, @Valid @RequestBody DrinkRequestDTO request) {
         return menuService.update(id, request);
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         menuService.delete(id);
         return ResponseEntity.noContent().build();

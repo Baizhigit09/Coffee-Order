@@ -23,7 +23,5 @@ public interface DrinkRepository extends JpaRepository<Drink, Long> {
     @EntityGraph(attributePaths = "category")
     Optional<Drink> findById(Long id);
 
-    Page<Drink> findByCategoryId(Long categoryId);
 
-    List<Drink> id(Long id);
 }
