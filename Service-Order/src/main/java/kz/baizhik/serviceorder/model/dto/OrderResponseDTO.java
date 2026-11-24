@@ -7,7 +7,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record OrderResponseDTO(
-        Long id, Long userId, OrderStatus status, BigDecimal unitPrice,
-        LocalDateTime createdAt, List<OrderItemResponseDTO> items
+        Long id,
+        Long userId,
+        OrderStatus status,
+        BigDecimal unitPrice,
+        LocalDateTime createdAt,
+        List<OrderItemResponseDTO> items
 ) {
 }
